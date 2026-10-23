@@ -1,0 +1,26 @@
+/* Canoe: dark editorial portfolio, inspired by the user-supplied reference. */
+:root {
+  --bg: #111112;
+  --surface: #19191b;
+  --surface-raised: #202022;
+  --ink: #f1eee9;
+  --muted: #b0ada8;
+  --quiet: #85817c;
+  --line: #333230;
+  --accent: #e9a480;
+  --accent-soft: #342820;
+  --heading: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  --body: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  --mono: "Cascadia Code", "Consolas", monospace;
+}
+[data-theme="light"] {
+  --bg: #f7f5f1;
+  --surface: #efede8;
+  --surface-raised: #e8e5de;
+  --ink: #252420;
+  --muted: #625e56;
+  --quiet: #746f65;
+  --line: #d7d2c8;
+  --accent: #984b2b;
+  --accent-soft: #eadbd0;
+}

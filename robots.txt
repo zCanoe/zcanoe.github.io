@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zcanoe.github.io/sitemap.xml
