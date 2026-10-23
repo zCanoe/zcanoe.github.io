@@ -10,6 +10,8 @@ const accessibleTranslations = [...document.querySelectorAll("[data-en-aria]")];
 const chineseText = new Map(translations.map(node => [node, node.innerHTML]));
 const chineseAria = new Map(accessibleTranslations.map(node => [node, node.getAttribute("aria-label")]));
 let language = "zh";
+const pageTitleZh = root.dataset.titleZh || document.title;
+const pageTitleEn = root.dataset.titleEn || "Junbo Zhou · Full-stack Developer";
 
 function remember(key, value) {
   try { localStorage.setItem(key, value); } catch (_) { /* The page also works without browser storage. */ }
@@ -41,9 +43,10 @@ function setLanguage(next) {
   languageButton.textContent = language === "en" ? "中" : "EN";
   languageButton.setAttribute("aria-label", language === "en" ? "切换到中文" : "Switch to English");
   languageButton.title = languageButton.getAttribute("aria-label");
-  document.title = language === "en" ? "Junbo Zhou · Full-stack Developer" : "周俊博 · 全栈开发工程师";
+  document.title = language === "en" ? pageTitleEn : pageTitleZh;
   syncControls();
   remember("canoe-language", language);
+  document.dispatchEvent(new CustomEvent("languagechange", { detail: language }));
 }
 
 languageButton.addEventListener("click", () => setLanguage(language === "zh" ? "en" : "zh"));
@@ -72,8 +75,8 @@ document.addEventListener("click", event => {
   if (!event.target.closest(".header")) closeMenu();
 });
 
-const navigationLinks = [...navigation.querySelectorAll("a")];
-const sections = navigationLinks.map(link => document.querySelector(link.hash));
+const navigationLinks = [...navigation.querySelectorAll('a[href^="#"]')];
+const sections = navigationLinks.map(link => document.getElementById(link.hash.slice(1))).filter(Boolean);
 let scrollScheduled = false;
 function updateScroll() {
   const top = window.scrollY;
@@ -83,7 +86,7 @@ function updateScroll() {
   for (const section of sections) {
     if (section.getBoundingClientRect().top <= 160) current = section.id;
   }
-  if (total > 0 && top >= total - 20) current = "contact";
+  if (sections.length && total > 0 && top >= total - 20) current = sections[sections.length - 1].id;
   for (const link of navigationLinks) {
     if (link.hash === `#${current}`) link.setAttribute("aria-current", "location");
     else link.removeAttribute("aria-current");
@@ -103,10 +106,10 @@ window.addEventListener("beforeprint", () => {
 window.addEventListener("afterprint", () => {
   if (detailsBeforePrint) for (const [node, open] of detailsBeforePrint) node.open = open;
 });
-document.querySelector("#print").addEventListener("click", () => window.print());
+document.querySelector("#print")?.addEventListener("click", () => window.print());
 
 let toastTimeout;
-document.querySelector("#copy-email").addEventListener("click", async () => {
+document.querySelector("#copy-email")?.addEventListener("click", async () => {
   const toast = document.querySelector("#toast");
   try {
     await navigator.clipboard.writeText("760548276@qq.com");
