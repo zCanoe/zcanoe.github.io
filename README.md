@@ -1,5 +1,7 @@
 # 周俊博 · 个人主页与随笔
 
+> 当前源码仓库为私有，联系邮箱为 `internetcanoe@gmail.com`。GitHub Free 不支持私有仓库的 Pages，因此当前 `github.io` 网站停用。CI 仍会校验文章并构建，Pages 未启用时跳过部署。若要保持源码私有并恢复此地址，请升级支持私有 Pages 的套餐，在 Settings → Pages 启用 GitHub Actions；之后提交文章或手动运行工作流即可恢复自动发布。
+
 主页：<https://zcanoe.github.io/> · 随笔：<https://zcanoe.github.io/blog/>
 
 ## 发布随笔（只需浏览器）
@@ -7,7 +9,7 @@
 1. 用 **zCanoe** 登录 GitHub，打开 [新建文章](https://github.com/zCanoe/zcanoe.github.io/new/main/posts)，文件名填 `my-note.md`，保留在 `posts/` 目录。
 2. 粘贴下面模板，填写标题、日期、唯一英文 slug、简介、标签和正文。
 3. 写好后设置 `draft: false`，点 **Commit changes** 提交到 **main**。
-4. 在 [Actions](https://github.com/zCanoe/zcanoe.github.io/actions/workflows/pages.yml) 查看 **Build and deploy site**。成功后，文章页、归档、主页最新 3 篇、RSS 和 sitemap 一起更新，通常需要几分钟。
+4. 在 [Actions](https://github.com/zCanoe/zcanoe.github.io/actions/workflows/pages.yml) 查看 **Build and deploy site**。Pages 启用后，成功部署会一起更新文章页、归档、主页最新 3 篇、RSS 和 sitemap，通常需要几分钟；当前未启用 Pages 时仅校验和构建，部署显示 skipped。
 
 ```markdown
 ---
